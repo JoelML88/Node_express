@@ -1,9 +1,12 @@
-// Invocación de la librería express
-const express = require('express');
 // Invocación de la libreria mongoose para conexión a base de datos de mongodb
 const mongoose = require('mongoose');
 // Importar las rutas de la colección Food
 const foodRoute = require('./routes/food.route');
+
+const express = require('express');
+
+const PORT = process.env.PORT || 3000; // Usa el puerto asignado por Render o 3000 por defecto
+
 
 // Inicialización de la aplicación basada en express
 const app = express();
@@ -30,8 +33,9 @@ app.use('/api/Foods', foodRoute);
 mongoose.connect("mongodb+srv://JoelMLeon:JoyCuco218821@mad-adn-prod1.vwuce.mongodb.net/Food_Nutrients?retryWrites=true&w=majority&appName=MAD-ADN-PROD1")
 .then( () => {
     console.log('Conectado a la base de datos de manera exitosa');
-    app.listen(3000, () => {
-        console.log('Servidor respondiendo en el puerto 3000');
+    
+    app.listen(PORT, () => {
+        console.log(`Servidor corriendo en el puerto ${PORT}`);
     });
 })
 .catch( () => console.log('Ocurrió un problema al conectar la base de datos') )
