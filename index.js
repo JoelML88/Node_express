@@ -2,8 +2,8 @@
 const express = require('express');
 // Invocación de la libreria mongoose para conexión a base de datos de mongodb
 const mongoose = require('mongoose');
-// Importar las rutas de la colección Review
-const reviewRoute = require('./routes/review.route');
+// Importar las rutas de la colección Food
+const foodRoute = require('./routes/food.route');
 
 // Inicialización de la aplicación basada en express
 const app = express();
@@ -21,13 +21,13 @@ app.get('/', (req, res) => {
     res.send('Bienvenido a mi servidor de APIs');
 });
 
-// Endpoints de la colección Reviews
-app.use('/api/reviews', reviewRoute);
+// Endpoints de la colección Foods
+app.use('/api/Foods', foodRoute);
 
 // Definiendo la conexión a base de datos a través de mongoose
 // La conexión a base de datos es de tipo promesa
 
-mongoose.connect('mongodb://localhost:27017/AirBnB')
+mongoose.connect("mongodb+srv://JoelMLeon:JoyCuco218821@mad-adn-prod1.vwuce.mongodb.net/Food_Nutrients?retryWrites=true&w=majority&appName=MAD-ADN-PROD1")
 .then( () => {
     console.log('Conectado a la base de datos de manera exitosa');
     app.listen(3000, () => {

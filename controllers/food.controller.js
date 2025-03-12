@@ -1,10 +1,10 @@
-const Review = require('../models/review.model');
+const Food = require('../models/food.model');
 
-// Función para recuperar la colección de Reviews
-const getReviews = async(req, res) => {
+// Función para recuperar la colección de Comida
+const getFoods = async(req, res) => {
     try {
-        const Reviews = await Review.find({});
-        res.status(200).json(Reviews);
+        const Foods = await Food.find({}).limit(20);
+        res.status(200).json(Foods);
     } catch (error) {
         res.status(500).json({
             status: "error: " + error.message
@@ -13,12 +13,12 @@ const getReviews = async(req, res) => {
 }
 
 // Función para recuperar un elemento de la colección con base en el _id
-const getReviewById = async(req, res) => {
+const getFoodById = async(req, res) => {
     try {
         // id proviene de una variable en la URL
         const { id } = req.params;
-        const Reviews = await Review.find({'_id': id});
-        res.status(200).json(Reviews);
+        const Foods = await Food.find({'_id': id});
+        res.status(200).json(Foods);
     } catch (error) {
         res.status(500).json({
             status: "error: " + error.message
@@ -27,10 +27,10 @@ const getReviewById = async(req, res) => {
 }
 
 // Función que agrega un elemento a la colección
-const setReview = async(req, res) => {
+const setFood = async(req, res) => {
     try {
-        const SimpleReview = await Review.create( req.body );
-        res.status(200).json(SimpleReview);
+        const SimpleFood = await Food.create( req.body );
+        res.status(200).json(SimpleFood);
     } catch (error) {
         res.status(500).json({
             status: "error: " + error.message
@@ -39,18 +39,18 @@ const setReview = async(req, res) => {
 }
 
 // Función para actualizar un elemento de la colección usando su _id
-const updateReview = async(req, res) => {
+const updateFood = async(req, res) => {
     try {
         const { id } = req.params;
-        const UpdatedReview = await Review.findByIdAndUpdate(id, req.body );
-        if (!UpdatedReview) {
+        const UpdatedFood = await Food.findByIdAndUpdate(id, req.body );
+        if (!UpdatedFood) {
             return res.status(400).json({
                 status: "error",
                 message: "Document not found"
             });
         }
-        const Reviews = await Review.find({'_id': id});
-        res.status(200).json(Reviews);
+        const Foods = await Food.find({'_id': id});
+        res.status(200).json(Foods);
     } catch (error) {
         res.status(500).json({
             status: "error: " + error.message
@@ -59,17 +59,17 @@ const updateReview = async(req, res) => {
 }
 
 // Función para eliminar un elemento de la colección con base en el _id
-const deleteReviewById = async(req, res) => {
+const deleteFoodById = async(req, res) => {
     try {
         // id proviene de una variable en la URL
         const { id } = req.params;
-        const Reviews = Review.find({ '_id':id });
-        if (!Reviews) {
+        const Foods = Food.find({ '_id':id });
+        if (!Foods) {
             res.status(400).json({
                 message: "Document not found"
             });
         }
-        const deletedReview = await Review.deleteOne({'_id': id});
+        const deletedFood = await Food.deleteOne({'_id': id});
         res.status(200).json({
             message: "Document deleted"
         });
@@ -81,9 +81,9 @@ const deleteReviewById = async(req, res) => {
 }
 
 module.exports = {
-    getReviews,
-    getReviewById,
-    setReview,
-    updateReview,
-    deleteReviewById
+    getFoods,
+    getFoodById,
+    setFood,
+    updateFood,
+    deleteFoodById
 }
