@@ -30,7 +30,7 @@ app.use('/api/Foods', foodRoute);
 // Definiendo la conexión a base de datos a través de mongoose
 // La conexión a base de datos es de tipo promesa
 
-mongoose.connect("mongodb+srv://JoelMLeon:JoyCuco218821@mad-adn-prod1.vwuce.mongodb.net/Food_Nutrients?retryWrites=true&w=majority&appName=MAD-ADN-PROD1")
+mongoose.connect("mongodb+srv://JoelMLeon:JoyCuco218821@mad-adn-prod1.vwuce.mongodb.net/Food_Nutrients?retryWrites=true&w=majority&appName=MAD-ADN-PROD1&tls=true")
 .then( () => {
     console.log('Conectado a la base de datos de manera exitosa');
     
@@ -38,5 +38,5 @@ mongoose.connect("mongodb+srv://JoelMLeon:JoyCuco218821@mad-adn-prod1.vwuce.mong
         console.log(`Servidor corriendo en el puerto ${PORT}`);
     });
 })
-.catch( () => console.log('Ocurrió un problema al conectar la base de datos') )
+.catch( (err) => console.log('Ocurrió un problema al conectar la base de datos'+err) )
 
