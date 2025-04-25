@@ -87,5 +87,5 @@ const ReviewSchema = mongoose.Schema(
     }
 )
 
-const Review = mongoose.model('food', ReviewSchema, 'food');
+const Review = mongoose.model('foods', ReviewSchema, 'foods');
 module.exports = Review;
